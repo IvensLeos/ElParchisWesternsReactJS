@@ -1,0 +1,15 @@
+* {
+   text-align: center;
+   color: white;
+}
+
+.Logo-Props {
+   margin: 3em 0;
+}
+
+.Form-Props {
+   margin: 12% 0;
+   background-image: url(../images/Rectangulo.png);
+   background-size: 100% 100%;
+   padding: 3%;
+}

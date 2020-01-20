@@ -1,0 +1,22 @@
+  
+body{
+  background-image: url(e7c9717093001a83fa7ffe4f12b880f2.jpg);
+  background-size: 100% 100%;
+  background-attachment: fixed;
+  /* position: relative; */
+  /* background-repeat: no-repeat; */
+}
+* {
+   text-align: center;
+}
+
+.Logo-Props {
+   margin: 3em 0;
+}
+
+.Form-Props {
+   margin: 12% 0;
+   background-image: url(9314007847721302ee954fc9e2875263.png);
+   background-size: 100% 100%;
+   padding: 3%;
+}
