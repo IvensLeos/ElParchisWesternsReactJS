@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import '../styles/BodyLanding.css'
 
@@ -12,10 +12,14 @@ import Inicio from '../images/Inicio.png'
 import FormLanding from './FormLanding'
 import ColContainer from './ColContainer'
 
+import ToastNotification from './ToastNotification'
+
 const BodyLanding = () => {
+
+   const [Notification, SetNotification] = useState('')
    
    return (
-
+      <>
       <Container fluid="true">
          <Row>
             <ColContainer InnerClass="Logo-Props" InnerElement={
@@ -32,7 +36,7 @@ const BodyLanding = () => {
                            <img src={Inicio} alt="Imagen De Inicio" style={{
                               width: '80%'
                            }} />
-                           <FormLanding />
+                           <FormLanding Notification={SetNotification}/>
                         </>
                      } />
                      <Col xs={3}></Col>
@@ -41,9 +45,10 @@ const BodyLanding = () => {
             </Col>
          </Row>
       </Container>
-
+         {Notification ? <ToastNotification Notes={Notification} Notification={SetNotification} /> : ''}
+   </>
    )
-
+   
 }
 
 export default BodyLanding

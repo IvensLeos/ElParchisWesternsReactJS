@@ -13,7 +13,7 @@ Router.get('/users/:email/:password', async (req, res) => {
          res.json(user)
       })
       .catch(err => {
-         res.json(false)
+         res.json(null)
       })
 })
 

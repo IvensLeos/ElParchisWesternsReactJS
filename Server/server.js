@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const server = require("http").Server(app)
+const cors = require('cors')
 
 const path = require('path')
 const morgan = require('morgan')
@@ -8,10 +8,10 @@ const morgan = require('morgan')
 const { mongoose } = require('./database')
 
 // Settings
-const PORT = process.env.PORT || 3001
-app.set("port", PORT)
+app.set("port", process.env.PORT || 3001)
 
 // Midlewares
+app.use(cors({ origin: 'http://localhost:3000' }))
 app.use(morgan('dev'))
 app.use(express.json())
 
@@ -26,6 +26,6 @@ app.get('*', (req, res) => {
 })
 
 // Starting Server
-server.listen(PORT, () => {
-   console.log(`Servidor Corriendo En http://localhost:${PORT}`);
+app.listen(app.get('port'), () => {
+   console.log(`Servidor Corriendo En http://localhost:${app.get('port')}`);
 })
