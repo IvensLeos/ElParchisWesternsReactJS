@@ -3,15 +3,35 @@ import React, { useState } from 'react'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import Card from 'react-bootstrap/Card'
 import Tabs from 'react-bootstrap/Tabs'
 import Tab from 'react-bootstrap/Tab'
-import Image from 'react-bootstrap/Image'
 
 import '../styles/BodyDashboard.css'
 
-const BodyDashboard = () => {
-   const [activekey2, setactivekey] = useState('link-5')
+import CardPlayer from '../components/CardPlayer'
+import removeLocalStorage from '../util/removeLocalStorage'
+import { useLocalStorage } from '../hooks/useLocalStorage'
+import Variables from '../util/config'
+
+const BodyDashboard = (props) => {
+   
+   //LogOut: removeLocalStorage('parchis_payload')
+
+   const [payload, setPayload] = useLocalStorage('parchis_payload', '')
+   const [UserParams, SetUserParams] = useState('')
+   
+   function FetchData(payload) {
+      if (payload) {
+         fetch(`${Variables.SERVER_PATH}/api/session/get/user`, {
+            method: 'POST', body: JSON.stringify({_id : payload}), headers: { 'Content-Type': 'application/json' }
+         })
+            .then(r => r.json()).then(data => {
+               SetUserParams(data.User)
+            })
+      }
+   }
+
+   FetchData(payload)
 
    return (
       <>
@@ -22,19 +42,9 @@ const BodyDashboard = () => {
                   <Container className="Background">
                      <Tabs fill variant="none" defaultActiveKey="PERFIL" id="uncontrolled-tab-example" className="TabsClass" >
                         <Tab eventKey="PERFIL" title="MI PERFIL">
-                           <Card text="white" style={{ width: '100%', backgroundColor: 'transparent' }}>
-                              <Card.Header><h4>TARJETA DEL JUGADOR</h4></Card.Header>
-                              <Image variant="top" src="https://bit.ly/2Gsoq0J" roundedCircle className="ImgClass mx-auto mt-4" />
-                              <Card.Body>
-                                 <Card.Title>IVENSLEOS8</Card.Title>
-                                 <Card.Text>
-                                    <strong>(PROFICIENT)</strong>
-                                 </Card.Text>
-                                 <Card.Text>
-                                    "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."
-                                 </Card.Text>
-                              </Card.Body>
-                           </Card>
+                           <CardPlayer 
+                              Image={UserParams.image} Username={UserParams.username} 
+                              Level={UserParams.level} Bio={UserParams.bio} />
                         </Tab>
                         <Tab eventKey="MENSAJES" title="MENSAJES">
                            <p>MENSAJES</p>

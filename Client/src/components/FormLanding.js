@@ -7,6 +7,9 @@ import Button from 'react-bootstrap/Button'
 
 import { Redirect } from 'react-router-dom'
 
+import { useLocalStorage } from '../hooks/useLocalStorage'
+import Variables from '../util/config'
+
 const FormLanding = (props) => {
 
    const [Username, SetUsername] = useState('')
@@ -20,25 +23,33 @@ const FormLanding = (props) => {
    const [InputPasswordError, SetInputPasswordError] = useState('')
    const [InputLoginError, SetInputLoginError] = useState('')
 
+   const [payload, setPayload] = useLocalStorage('parchis_payload', '')
+
    const SubmitForm = e => {
       e.preventDefault()
       const user = { username: Username, email: Email, password: Password }
       if (e.target.name === 'Registrarse') {
-         fetch('/api/session/signup', {
+         fetch(`${Variables.SERVER_PATH}/api/session/signup`, {
             method: 'POST', body: JSON.stringify(user), headers: { 'Content-Type': 'application/json' }
          })
             .then(r => r.json()).then(data => {
                ErrorsController(data.errors)
-               if (data.UserId) SetIsLoggedIn(true)
+               if (data.UserId) {
+                  setPayload(data.UserId)
+                  SetIsLoggedIn(true)
+               }
             })
       }
       if (e.target.name === 'Ingresar') {
-         fetch('/api/session/login', {
+         fetch(`${Variables.SERVER_PATH}/api/session/login`, {
             method: 'POST', body: JSON.stringify(user), headers: { 'Content-Type': 'application/json' }
          })
             .then(r => r.json()).then(data => {
                ErrorsController(data.errors)
-               if (data.UserId)  SetIsLoggedIn(true)
+               if (data.UserId) {
+                  setPayload(data.UserId)
+                  SetIsLoggedIn(true)
+               }
             })
       }
    }

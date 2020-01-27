@@ -26,7 +26,9 @@ const UserSchema = new mongoose.Schema({
       required: [true, 'Password: Este Campo No Puede Estar Vacio.\n'], 
       match: [/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&#.$($)$-$_])[A-Za-z\d$@$!%*?&#.$($)$-$_]{8,15}$/, 'Password: Debe Contener Una Longitud De 8 A 20 Caracteres, Almenos Una Letra Mayuscula, Una Letra Minuscula, Un Numero Y Un Caracter Especial.\n'] 
    },
-   image: String
+   image: { type: String, default: 'https://www.bootdey.com/img/Content/avatar/avatar7.png' }, 
+   bio: { type: String, default: 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...' },
+   level: { type: String, default: 'PROFICIENT' }
 }, {timestamps: true})
 
 UserSchema.plugin(UniqueValidator, { message: 'Disponibilidad: {VALUE} Ya Se Encuentra Registrado.' })
