@@ -5,7 +5,7 @@ import path from 'path'
 import mongoose from 'mongoose'
 import session from 'express-session'
 import connectStore from 'connect-mongo'
-import morgan from 'morgan'
+//import morgan from 'morgan'
 
 import { SessionRoutes } from './routes/index'
 
@@ -32,7 +32,7 @@ import { NODE_ENV, MONGODB_URI, SESSION_NAME, SESSION_SECRET, SESSION_LIFETIME }
          "preflightContinue": false,
          "optionsSuccessStatus": 204
       }))
-      app.use(morgan('dev'))
+      //app.use(morgan('dev'))
       app.use(express.json())
       app.use(session({
          name: SESSION_SECRET,
