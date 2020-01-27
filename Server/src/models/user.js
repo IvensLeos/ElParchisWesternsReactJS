@@ -50,7 +50,7 @@ UserSchema.methods.generateJWT = function() {
       id: this._id,
       username: this.username,
       expires: parseInt(expires.getTime() / 1000)
-   }, SESSION_SECRET)
+   }, process.env.SESSION_SECRET || SESSION_SECRET)
 }
 
 UserSchema.methods.toAuthJSON = function() {
