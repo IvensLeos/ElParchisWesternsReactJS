@@ -10,12 +10,12 @@ import morgan from 'morgan'
 import { SessionRoutes } from './routes/index'
 
 // Database Settings & Connections
-import { NODE_ENV, MONGO_URI, SESSION_NAME, SESSION_SECRET, SESSION_LIFETIME } from './config'
+import { NODE_ENV, MONGODB_URI, SESSION_NAME, SESSION_SECRET, SESSION_LIFETIME } from './config'
 
 (async () => {
    try {
 
-      await mongoose.connect(MONGO_URI, { keepAlive: 1, useUnifiedTopology: true, useNewUrlParser: true })
+      await mongoose.connect(MONGODB_URI, { keepAlive: 1, useUnifiedTopology: true, useNewUrlParser: true })
       console.log('Conectado A MongoDB')
 
       const app = express()
