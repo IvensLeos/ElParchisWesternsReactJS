@@ -1,0 +1,20 @@
+{
+  "name": "elparchiswesternsreactjs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "cd Server && npm Install && cd src && npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IvensLeos/ElParchisWesternsReactJS.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IvensLeos/ElParchisWesternsReactJS/issues"
+  },
+  "homepage": "https://github.com/IvensLeos/ElParchisWesternsReactJS#readme"
+}
