@@ -15,7 +15,7 @@ import { NODE_ENV, MONGODB_URI, SESSION_NAME, SESSION_SECRET, SESSION_LIFETIME }
 (async () => {
    try {
 
-      await mongoose.connect(MONGODB_URI, { keepAlive: 1, useUnifiedTopology: true, useNewUrlParser: true })
+      await mongoose.connect(process.env.MONGODB_URI || MONGODB_URI, { keepAlive: 1, useUnifiedTopology: true, useNewUrlParser: true })
       console.log('Conectado A MongoDB')
 
       const app = express()
@@ -35,19 +35,19 @@ import { NODE_ENV, MONGODB_URI, SESSION_NAME, SESSION_SECRET, SESSION_LIFETIME }
       //app.use(morgan('dev'))
       app.use(express.json())
       app.use(session({
-         name: SESSION_SECRET,
-         secret: SESSION_SECRET,
+         name: process.env.SESSION_SECRET || SESSION_SECRET,
+         secret: process.env.SESSION_SECRET || SESSION_SECRET,
          saveUninitialized: false,
          resave: false,
          store: new MongoStore({
             mongooseConnection: mongoose.connection,
             collection: 'session',
-            ttl: parseInt(SESSION_LIFETIME) / 1000
+            ttl: parseInt(process.env.SESSION_LIFETIME || SESSION_LIFETIME) / 1000
          }),
          cookie: {
             sameSite: true,
-            secure: NODE_ENV === 'production',
-            maxAge: parseInt(SESSION_LIFETIME)
+            secure: process.env.NODE_ENV === 'production',
+            maxAge: parseInt(process.env.SESSION_LIFETIME || SESSION_LIFETIME)
          }
       }))
 
