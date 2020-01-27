@@ -1,4 +1,3 @@
-import UserRoutes from './user'
-import SessionRoutes from './session'
+import SessionRoutes from './sessions'
 
-export { UserRoutes, SessionRoutes }
+export { SessionRoutes }

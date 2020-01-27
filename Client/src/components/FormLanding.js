@@ -9,42 +9,52 @@ import { Redirect } from 'react-router-dom'
 
 const FormLanding = (props) => {
 
-   const { Notification } = props
-
    const [Username, SetUsername] = useState('')
    const [Email, SetEmail] = useState('')
    const [Password, SetPassword] = useState('')
    const [RenderFormLoggin, SetRenderFormLoggin] = useState(true)
    const [IsLoggedIn, SetIsLoggedIn] = useState(false)
-   const [Count, SetCount] = useState(0)
 
-   const handleSubmit = (e) => {
-      //Development Mode   fetch('http://localhost:3001/api/users/:username/:password')
-      //Production Mode    fetch('/api/users/:username/:password')
+   const [InputUsernameError, SetInputUsernameError] = useState('')
+   const [InputEmailError, SetInputEmailError] = useState('')
+   const [InputPasswordError, SetInputPasswordError] = useState('')
+   const [InputLoginError, SetInputLoginError] = useState('')
 
-      //User For Test: ochenteros@gmail.com Holamam*01
-
+   const SubmitForm = e => {
       e.preventDefault()
-      console.log(`${Username} - ${Email} - ${Password}`)
-
-      if (e.target.name === 'Ingresar') {
-         fetch(`http://localhost:3001/api/users/${Email}/${Password}`)
-            .then(response => response.json())
-            .then(data => {
-               return data ? 
-                  SetIsLoggedIn(true)
-                  : 
-                  'NotificationError()'
+      const user = { username: Username, email: Email, password: Password }
+      if (e.target.name === 'Registrarse') {
+         fetch('/api/session/signup', {
+            method: 'POST', body: JSON.stringify(user), headers: { 'Content-Type': 'application/json' }
+         })
+            .then(r => r.json()).then(data => {
+               ErrorsController(data.errors)
+               if (data.UserId) SetIsLoggedIn(true)
             })
-            .catch(error => Notification(`Error:`))
       }
-
+      if (e.target.name === 'Ingresar') {
+         fetch('/api/session/login', {
+            method: 'POST', body: JSON.stringify(user), headers: { 'Content-Type': 'application/json' }
+         })
+            .then(r => r.json()).then(data => {
+               ErrorsController(data.errors)
+               if (data.UserId)  SetIsLoggedIn(true)
+            })
+      }
    }
 
-   const NotificationError = () => {
-      SetCount(Count + 1)
-      console.log(Count)
-      Notification(`${Count}: Usuario O Contraseña Incorrectos Intente De Nuevo...`)
+   function ErrorsController(Errors) {
+      if (Errors) {
+         Errors.username ? SetInputUsernameError(Errors.username.message) : SetInputUsernameError('')
+         Errors.email ? SetInputEmailError(Errors.email.message) : SetInputEmailError('')
+         Errors.password ? SetInputPasswordError(Errors.password.message) : SetInputPasswordError('')
+         Errors.login ? SetInputLoginError(Errors.login.message) : SetInputLoginError('')
+      } else {
+         SetInputUsernameError('')
+         SetInputEmailError('')
+         SetInputPasswordError('')
+         SetInputLoginError('')
+      }
    }
 
    return (
@@ -60,9 +70,9 @@ const FormLanding = (props) => {
             <Form.Group controlId="formBasicEmail">
                <Form.Label style={({ color: 'white' })}>Correo Electronico:</Form.Label>
                <Form.Control name="Email" onChange={(e) => SetEmail(e.target.value)} type="email" placeholder="Email" />
-               <Form.Text className="text-muted">
+               <Form.Text className="text-muted" >
                   Nunca Compartas Tu Correo Electronico.
-                  </Form.Text>
+               </Form.Text>
             </Form.Group>
 
             <Form.Group controlId="formBasicPassword">
@@ -71,14 +81,39 @@ const FormLanding = (props) => {
             </Form.Group>
 
             {RenderFormLoggin ?
-               <>
                <Form.Group controlId="formBasicCheckbox">
                   <Form.Check type="checkbox" label="Mantenerme Conectado" style={({ color: 'white' })} />
-               </Form.Group> 
-               <Button name="Ingresar" onClick={handleSubmit} type="submit" variant="success">INICIAR</Button>
-               </>
+               </Form.Group>: ''
+            }
+
+            {RenderFormLoggin ?
+               InputLoginError ?
+                  <>
+                     <Form.Text style={({ color: 'red', fontSize: '10px' })} >
+                        {InputLoginError}
+                     </Form.Text>
+                     <br />
+                  </> : ''
+               :
+               InputUsernameError || InputEmailError || InputPasswordError ?
+                  <>
+                     <Form.Text style={({ color: 'red', fontSize: '10px' })} >
+                        {InputUsernameError}
+                     </Form.Text>
+                     <Form.Text style={({ color: 'red', fontSize: '10px' })} >
+                        {InputEmailError}
+                     </Form.Text>
+                     <Form.Text style={({ color: 'red', fontSize: '10px' })} >
+                        {InputPasswordError}
+                     </Form.Text>
+                     <br />
+                  </> : ''
+            }
+
+            {RenderFormLoggin ?
+               <Button name="Ingresar" onClick={SubmitForm} type="submit" variant="success">INICIAR</Button>
                : 
-               <Button name="Registrarse" onClick={handleSubmit} type="submit" variant="success">REGISTRARME</Button>
+               <Button name="Registrarse" onClick={SubmitForm} type="submit" variant="success">REGISTRARME</Button>
             }
 
             <span className="mr-2"></span>

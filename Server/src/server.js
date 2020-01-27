@@ -7,7 +7,7 @@ import session from 'express-session'
 import connectStore from 'connect-mongo'
 import morgan from 'morgan'
 
-import { UserRoutes, SessionRoutes } from './routes/index'
+import { SessionRoutes } from './routes/index'
 
 // Database Settings & Connections
 import { NODE_ENV, MONGO_URI, SESSION_NAME, SESSION_SECRET, SESSION_LIFETIME } from './config'
@@ -26,7 +26,12 @@ import { NODE_ENV, MONGO_URI, SESSION_NAME, SESSION_SECRET, SESSION_LIFETIME } f
       app.set("port", process.env.PORT || 3001)
 
       // Midlewares
-      app.use(cors({ origin: 'http://localhost:3000' }))
+      app.use(cors({
+         "origin": "http://localhost:3000",
+         "methods": ["GET, POST, DELETE"],
+         "preflightContinue": false,
+         "optionsSuccessStatus": 204
+      }))
       app.use(morgan('dev'))
       app.use(express.json())
       app.use(session({
@@ -47,22 +52,19 @@ import { NODE_ENV, MONGO_URI, SESSION_NAME, SESSION_SECRET, SESSION_LIFETIME } f
       }))
 
       // Static Files
-      app.use(express.static(path.join(__dirname, '../Client/build')))
+      app.use(express.static(path.join(__dirname, '../../Client/build')))
 
       // Routes
       const ApiRouter = express.Router()
       app.use('/api', ApiRouter)
-      ApiRouter.use('/users', UserRoutes)
       ApiRouter.use('/session', SessionRoutes)
 
       app.get('*', (req, res) => {
-         res.sendFile(path.join(__dirname, '../Client/build/index.html'))
-      })
+         res.sendFile(path.join(__dirname, '../../Client/build/index.html'))
+      }) 
 
       // Starting Server
       app.listen(app.get('port'), () => console.log(`Servidor Corriendo En http://localhost:${app.get('port')}`))
 
-   } catch (error) {
-      console.log(error)
-   }
+   } catch (error) { console.log(error) }
 })()

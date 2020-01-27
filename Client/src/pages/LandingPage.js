@@ -1,19 +1,9 @@
 import React from 'react'
 
-import Background from '../components/Background'
 import BodyLanding from '../components/BodyLanding'
 
-class LandingPage extends React.Component {
-
-   render() {
-      return (
-         <React.Fragment>
-            <Background />
-            <BodyLanding />
-         </React.Fragment>
-      )
-   }
-
+const LandingPage = () => {
+   return <BodyLanding />
 }
 
 export default LandingPage
