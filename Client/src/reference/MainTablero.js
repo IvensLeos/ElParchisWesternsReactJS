@@ -59,17 +59,17 @@ function draw() {
   // background(tablero);
 
   //textFont("monospace");
-  textSize(15.5);
-  textAlign(CENTER, CENTER);
-  fill(255);
-  text(jugador[0].toUpperCase(), 107,  26);
-  text(jugador[1].toUpperCase(), 515,  26);
-  text(jugador[2].toUpperCase(), 107, 617);
-  text(jugador[3].toUpperCase(), 515, 617);
+  // textSize(15.5);
+  // textAlign(CENTER, CENTER);
+  // fill(255);
+  // text(jugador[0].toUpperCase(), 107,  26);
+  // text(jugador[1].toUpperCase(), 515,  26);
+  // text(jugador[2].toUpperCase(), 107, 617);
+  // text(jugador[3].toUpperCase(), 515, 617);
 
-  imageMode(CENTER);
-  image(imagenDados[dado[0] - 1], 297, 307, 50, 50);
-  image(imagenDados[dado[1] - 1], 338, 343, 50, 50);
+  // imageMode(CENTER);
+  // image(imagenDados[dado[0] - 1], 297, 307, 50, 50);
+  // image(imagenDados[dado[1] - 1], 338, 343, 50, 50);
   var verificar = false;
 
   for (var i = 0; i < ficha.length; i++) {
