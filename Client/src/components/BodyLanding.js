@@ -10,7 +10,6 @@ import Logo from '../images/Logo.png'
 import Inicio from '../images/Inicio.png'
 
 import FormLanding from './FormLanding'
-import ColContainer from './ColContainer'
 
 import ToastNotification from './ToastNotification'
 
@@ -22,23 +21,23 @@ const BodyLanding = () => {
       <>
       <Container fluid="true">
          <Row>
-            <ColContainer InnerClass="Logo-Props" InnerElement={
-               <img src={Logo} alt="Logo" style={{
-                  width: '100%'
-               }} />
-            } />
             <Col>
+               <Container className="Logo-Props">
+                     <img src={Logo} alt="Logo" style={{width: '100%'}} />
+               </Container>
+            </Col>
+            <Col className="mr-3">
                <Container className="Form-Props">
                   <Row>
                      <Col xs={3}></Col>
-                     <ColContainer InnerElement={
-                        <>
-                           <img src={Inicio} alt="Imagen De Inicio" style={{
-                              width: '80%'
-                           }} />
-                           <FormLanding Notification={SetNotification}/>
-                        </>
-                     } />
+                     <Col>
+                        <Container>
+                           <>
+                              <img src={Inicio} alt="Imagen De Inicio" style={{width: '80%'}} />
+                              <FormLanding Notification={SetNotification} />
+                           </>
+                        </Container>
+                     </Col>
                      <Col xs={3}></Col>
                   </Row>
                </Container>

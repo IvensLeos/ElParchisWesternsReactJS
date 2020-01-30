@@ -37,9 +37,6 @@ const PlaySketch = () => {
       ImagenDados[3] = p5.loadImage(Dado4)
       ImagenDados[4] = p5.loadImage(Dado5)
       ImagenDados[5] = p5.loadImage(Dado6)
-
-      //SonidoDeFondo = p5Sound.loadSound(SonidoDeFondo)
-
    }
 
    const setup = (p5, canvasParentRef) => {

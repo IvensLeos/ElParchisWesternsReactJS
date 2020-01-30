@@ -39,7 +39,7 @@ SessionRoutes.post('/get/user', async (req, res) => {
       if (User) {
          return res.send({ User })
       }
-      res.send(JSON.stringify({ errors: { get_user: { message: 'No Se Encontro Al Usuario.' } } }))
+      return res.send(JSON.stringify({ errors: { get_user: { message: 'No Se Encontro Al Usuario.' } } }))
    } catch (error) {
       return res.send(JSON.stringify(error))
    }
