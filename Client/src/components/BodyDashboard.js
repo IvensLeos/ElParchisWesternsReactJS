@@ -6,14 +6,16 @@ import Col from 'react-bootstrap/Col'
 import Tabs from 'react-bootstrap/Tabs'
 import Tab from 'react-bootstrap/Tab'
 
+import StripeCard from './StripeCard'
+
 import { Redirect } from 'react-router-dom'
 
 import '../styles/BodyDashboard.css'
 
 import CardPlayer from '../components/CardPlayer'
 import { useLocalStorage } from '../hooks/useLocalStorage'
-import removeLocalStorage from '../util/removeLocalStorage'
 import Variables from '../util/config'
+import Button from 'react-bootstrap/Button'
 
 const BodyDashboard = (props) => {
    
@@ -21,6 +23,7 @@ const BodyDashboard = (props) => {
 
    const [payload, Setpayload] = useLocalStorage('parchis_payload', '')
    const [UserParams, SetUserParams] = useState('')
+   const [Tablero, SetTablero] = useState(false)
    
    function FetchData(payload) {
       if (payload) {
@@ -28,15 +31,15 @@ const BodyDashboard = (props) => {
             method: 'POST', body: JSON.stringify({_id : payload}), headers: { 'Content-Type': 'application/json' }
          })
             .then(r => r.json()).then(data => {
-               if (data.User) {
-                  console.log('5' + data.User)
-                  SetUserParams(data.User)
-               }
+               if (data.User) SetUserParams(data.User)
                else Setpayload('')
             })
       }
    }
-   //
+
+   const IrAlTablero = e => {
+      SetTablero(true)
+   }
 
    return (
       <>
@@ -63,7 +66,7 @@ const BodyDashboard = (props) => {
                            <p>TIENDA</p>
                         </Tab>
                         <Tab eventKey="JUGAR" title="JUGAR">
-                           <p>JUGAR</p>
+                           <Button onClick={IrAlTablero}>Ir Al Tablero</Button>
                         </Tab>
                      </Tabs>
                   </Container>
@@ -71,7 +74,8 @@ const BodyDashboard = (props) => {
                <Col xs={2}></Col>
             </Row>
          </Container> : FetchData(payload)
-         : <Redirect to="/" />}         
+         : <Redirect to="/" />}   
+         {Tablero ? <Redirect to="/play" />: ''}      
       </>
    )
 }
