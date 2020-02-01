@@ -3,6 +3,7 @@ import React from "react"
 import Sketch from "react-p5"
 
 import Tablero from '../images/Tablero.png'
+import TableroRecurso from '../images/TableroRecurso.png'
 import Dado1 from '../images/Dado_1.png'
 import Dado2 from '../images/Dado_2.png'
 import Dado3 from '../images/Dado_3.png'

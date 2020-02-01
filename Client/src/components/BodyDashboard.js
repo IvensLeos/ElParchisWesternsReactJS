@@ -13,6 +13,7 @@ import { Redirect } from 'react-router-dom'
 import '../styles/BodyDashboard.css'
 
 import CardPlayer from '../components/CardPlayer'
+import HelpUser from '../components/HelpUser'
 import { useLocalStorage } from '../hooks/useLocalStorage'
 import Variables from '../util/config'
 import Button from 'react-bootstrap/Button'
@@ -49,7 +50,7 @@ const BodyDashboard = (props) => {
                <Col xs={2}></Col>
                <Col>
                   <Container className="Background">
-                     <Tabs fill variant="none" defaultActiveKey="PERFIL" id="uncontrolled-tab-example" className="TabsClass" >
+                     <Tabs fill variant="tabs" defaultActiveKey="AYUDA" id="uncontrolled-tab-example" className="TabsClass" >
                         <Tab eventKey="PERFIL" title="MI PERFIL">
                            <CardPlayer
                               Image={UserParams.image} Username={UserParams.username}
@@ -67,6 +68,9 @@ const BodyDashboard = (props) => {
                         </Tab>
                         <Tab eventKey="JUGAR" title="JUGAR">
                            <Button onClick={IrAlTablero}>Ir Al Tablero</Button>
+                        </Tab>
+                        <Tab eventKey="AYUDA" title="AYUDA">
+                           <HelpUser />                           
                         </Tab>
                      </Tabs>
                   </Container>
