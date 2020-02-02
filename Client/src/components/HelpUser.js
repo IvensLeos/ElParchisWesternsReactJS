@@ -78,6 +78,11 @@ const HelpUser = () => {
                         </Card.Text>
                         <Card.Text className="TextCardHelp">
                            Aenean mollis ullamcorper nisl sed hendrerit. 
+                           Quisque vitae augue sed sem consequat laoreet quis ullamcorper ligula. 
+                           Mauris interdum massa vel dictum aliquam. Ut commodo porttitor vulputate. 
+                           Aenean mollis ullamcorper nisl sed hendrerit. 
+                           Quisque vitae augue sed sem consequat laoreet quis ullamcorper ligula. 
+                           Mauris interdum massa vel dictum aliquam. Ut commodo porttitor vulputate. 
                         </Card.Text>
                      </Card.Body>
                   </Card>

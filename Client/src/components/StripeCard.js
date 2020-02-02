@@ -150,7 +150,7 @@ const SplitForm = ({ fontSize }) => {
 };
 
 
-const stripePromise = loadStripe("pk_test_6pRNASCoBOKtIshFeQd4XMUh");
+const stripePromise = loadStripe("pk_test_mV6etXc4I0aogrW8MaStXgHe006EdkmpJE");
 
 const StripeCard = () => {
    const getElementFontSize = () => (window.innerWidth < 450 ? "16px" : "18px");

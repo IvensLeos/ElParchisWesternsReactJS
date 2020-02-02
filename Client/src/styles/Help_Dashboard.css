@@ -53,7 +53,7 @@
 
 #uncontrolled-tab-example-tab-AYUDA {
    background-image: url('../images/Ayuda.png');
-   background-position-x: 60%;
+   background-position-x: 52%;
    background-position-y: 1.8px;
    background-size: 20px;
    background-repeat: no-repeat;
@@ -63,14 +63,29 @@
    border: transparent;
 }
 
+/*
 .tab-pane .FormLabelInputs {
    color:#dc3545 !important;
    font-weight: 600;
 }
+*/
 
+label.FormLabelInputs.form-label {
+   color:#dc3545 !important;
+   font-size: 13.4px !important;
+}
+
+/*
 .tab-pane .TextCardHelp {
    color: #fff;
    text-align: left;
+}
+*/
+
+p.TextCardHelp.card-text {
+   color: #fff;
+   text-align: left;
+   font-size: 13px;
 }
 
 .tab-pane .CardTitleHelp {
@@ -107,7 +122,7 @@
    margin-left: -25px;
    width: 105%;
    background-color: transparent;
-   max-height: 80%;
+   max-height: 73%;
    margin-top: -3.5%;
 }
 
@@ -144,4 +159,9 @@
 
 .thin::-webkit-scrollbar {
    width: 6px; 
+}
+
+.ScrollCard.scrollbar-pink.bordered-pink.square.thin.card.text-danger {
+   display: block;
+   border: none;
 }
