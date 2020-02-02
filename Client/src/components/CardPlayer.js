@@ -29,6 +29,10 @@ const CardPlayer = (props) => {
    const ViewAllUserInfo = () => {
       SetViewUserInfo(false)
    }
+   
+   const ViewAllUserInfo2 = () => {
+      SetViewUserInfo(true)
+   }
 
    return (
       IsLoggedIn ? ViewUserInfo ? <Card text="white" style={{ width: '100%', backgroundColor: 'transparent' }}>
@@ -50,7 +54,7 @@ const CardPlayer = (props) => {
       <>
          <Row className="mt-4 mx-auto">
             <Col xs={4}>
-                  <p style={{ color: 'white', textAlign: 'left', fontSize: '18px' }} className="mt-2"><span style={{ color: '#dc3545' }}>&lt;&lt;</span> ATRAS</p>
+                  <p onClick={ViewAllUserInfo2} style={{ color: 'white', textAlign: 'left', fontSize: '18px' }} className="mt-2"><span style={{ color: '#dc3545' }}>&lt;&lt;</span> ATRAS</p>
             </Col>
             <Col xs={4} style={{ color: '#dc3545' }}>
                <Row>
