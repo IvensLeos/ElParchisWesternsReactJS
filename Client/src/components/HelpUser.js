@@ -10,6 +10,8 @@ import Card from 'react-bootstrap/Card'
 import FlechaIndia from '../images/FlechaIndia.png'
 import Estrellita from '../images/Estrellita.png'
 
+import '../styles/Help_Dashboard.css'
+
 const HelpUser = () => {
 
    return (
@@ -23,13 +25,13 @@ const HelpUser = () => {
                      <img className="Estrellas" src={Estrellita} alt="Estrella" />
                   </Row>
                   <Form className="mt-3">
-                     <Form.Group controlId="formGroupEmail">
+                     <Form.Group controlId="formBasicUsername">
                         <Form.Label className="FormLabelInputs">NICKNAME O CORREO ELECTRONICO</Form.Label>
                         <Form.Control type="text" placeholder="Tu Nickname/Email Aqui.." />
                      </Form.Group>
-                     <Form.Group controlId="formGroupPassword">
+                     <Form.Group controlId="formBasicText">
                         <Form.Label className="FormLabelInputs">MENSAJE:</Form.Label>
-                        <Form.Control as="textarea" rows="11" placeholder="Tu Mensaje Aqui..." />
+                        <Form.Control as="textarea" rows="10" placeholder="Tu Mensaje Aqui..." />
                      </Form.Group>
                      <Button variant="success" size="lg" style={{minWidth: '200px'}}>ENVIAR</Button>
                   </Form>

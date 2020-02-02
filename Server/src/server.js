@@ -27,7 +27,7 @@ import { NODE_ENV, MONGODB_URI, SESSION_NAME, SESSION_SECRET, SESSION_LIFETIME }
 
       // Midlewares
       app.use(cors({
-         "origin": "http://localhost:3000",
+         "origin": ["http://localhost:3000, http://*.stripe.com, http://stripe.com, http://bit.ly"],
          "methods": ["GET, POST, DELETE"],
          "preflightContinue": false,
          "optionsSuccessStatus": 204

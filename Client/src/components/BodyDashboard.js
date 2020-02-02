@@ -50,7 +50,7 @@ const BodyDashboard = (props) => {
                <Col xs={2}></Col>
                <Col>
                   <Container className="Background">
-                     <Tabs fill variant="tabs" defaultActiveKey="AYUDA" id="uncontrolled-tab-example" className="TabsClass" >
+                     <Tabs fill variant="tabs" defaultActiveKey="PERFIL" id="uncontrolled-tab-example" className="TabsClass" >
                         <Tab eventKey="PERFIL" title="MI PERFIL">
                            <CardPlayer
                               Image={UserParams.image} Username={UserParams.username}
@@ -79,7 +79,7 @@ const BodyDashboard = (props) => {
             </Row>
          </Container> : FetchData(payload)
          : <Redirect to="/" />}   
-         {Tablero ? <Redirect to="/play" />: ''}      
+         {Tablero && <Redirect to="/play" />}      
       </>
    )
 }
