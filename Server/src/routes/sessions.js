@@ -4,12 +4,23 @@ import Users from '../models/user'
 
 const SessionRoutes = express.Router()
 
+SessionRoutes.post('/', async (req, res) => {
+   try {
+      const Session = req.session.userId
+      if (Session) return res.send({ UserId: Session })
+      else return false
+   } catch (error) {
+      return res.send(JSON.stringify(error))
+   }
+})
+
 SessionRoutes.post('/signup', async (req, res) => {
    try {
       const { username, email, password } = req.body
-      const NewUser = new Users({ username, email, password })
-      await NewUser.save()
-      return res.send({ UserId: NewUser.id, Email: NewUser.email })
+      const User = new Users({ username, email, password })
+      await User.save()
+      req.session.userId = User.id
+      return res.send({ User })
    } catch (error) {
       return res.send(JSON.stringify(error))
    }
@@ -20,7 +31,8 @@ SessionRoutes.post('/login', async (req, res) => {
       const { email, password } = req.body
       const User = await Users.findOne({ email })
       if (User && User.comparePasswords(password)) {
-         return res.send({ UserId: User.id, Email: User.email })
+         req.session.userId = User.id
+         return res.send({ User })
       }
       res.send(JSON.stringify({ errors: { login: { message: 'El Usuario O La Contraseña Son Incorrectos.' } } }))
    } catch (error) {
@@ -29,7 +41,9 @@ SessionRoutes.post('/login', async (req, res) => {
 })
 
 SessionRoutes.post('/logout', (req, res) => {
-   ''
+   req.logout()
+   req.session = null
+   //res.redirect('/')
 })
 
 SessionRoutes.post('/get/user', async (req, res) => {

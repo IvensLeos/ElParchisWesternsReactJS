@@ -35,7 +35,7 @@ import { NODE_ENV, MONGODB_URI, SESSION_NAME, SESSION_SECRET, SESSION_LIFETIME }
       //app.use(morgan('dev'))
       app.use(express.json())
       app.use(session({
-         name: process.env.SESSION_SECRET || SESSION_SECRET,
+         name: process.env.SESSION_NAME || SESSION_NAME,
          secret: process.env.SESSION_SECRET || SESSION_SECRET,
          saveUninitialized: false,
          resave: false,
@@ -61,7 +61,7 @@ import { NODE_ENV, MONGODB_URI, SESSION_NAME, SESSION_SECRET, SESSION_LIFETIME }
 
       app.get('*', (req, res) => {
          res.sendFile(path.join(__dirname, '../../Client/build/index.html'))
-      }) 
+      })
 
       // Starting Server
       app.listen(app.get('port'), () => console.log(`Servidor Corriendo En http://localhost:${app.get('port')}`))

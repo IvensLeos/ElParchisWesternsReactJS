@@ -1,9 +1,5 @@
 import React from 'react'
 
-import BodyDashboard from '../components/BodyDashboard'
-
-const DashboardPage = () => {
-   return <BodyDashboard />
+export const DashboardPage = () => {
+   return <hi className="TitlesHelp" style={{ color: '#fff', fontSize: '150px' }}>Landing Page</hi>
 }
-
-export default DashboardPage

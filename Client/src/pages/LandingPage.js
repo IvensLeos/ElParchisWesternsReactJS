@@ -1,14 +1,13 @@
-import React from 'react'
-import { Redirect } from 'react-router-dom'
+import React, { useState } from 'react'
 
+import Landing from '../components/landing'
+import Profile from '../components/profile'
 
-import BodyLanding from '../components/BodyLanding'
-import { useLocalStorage } from '../hooks/useLocalStorage'
+export const LandingPage = () => {
 
-const LandingPage = () => {
-   const [payload, setPayload] = useLocalStorage('parchis_payload', '')
+   const [User, SetUser] = useState('')
+   console.log('Me Renderize Con: ')
+   console.table(User)
 
-   return payload ? <Redirect to="/dashboard"/> : <BodyLanding />
+   return User ? <Profile User={SetUser} /> : <Landing User={SetUser} />
 }
-
-export default LandingPage
