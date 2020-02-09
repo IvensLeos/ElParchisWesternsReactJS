@@ -4,6 +4,13 @@
    src: url(../fonts/TrajanPro-Bold.otf);
 }
 
+@font-face {
+   font-family: 'Nashville';
+   font-style: normal;
+   font-weight: 400;
+   src: url(../fonts/Nashville.TTF);
+}
+
 * {
    text-align: center;
    font-family: 'TrajanPro-Bold';

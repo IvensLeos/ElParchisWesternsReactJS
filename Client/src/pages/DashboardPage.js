@@ -1,5 +1,12 @@
 import React from 'react'
 
-export const DashboardPage = () => {
-   return <hi className="TitlesHelp" style={{ color: '#fff', fontSize: '150px' }}>Landing Page</hi>
+import { Redirect } from 'react-router-dom'
+
+import Dashboard from '../components/dashboard'
+
+export const DashboardPage = props => {
+
+   let { User } = props.location.state || ''
+
+   return User ? <Dashboard User={User}/> : <Redirect to="/" />
 }
