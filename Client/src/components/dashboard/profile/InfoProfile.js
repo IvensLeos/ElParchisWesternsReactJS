@@ -35,10 +35,10 @@ const InfoProfile = props => {
                   </Row>
                   <Row className="ml-2">
                      <p style={{ color: '#dc3545' }}>SEXO</p>
-                     <input type="radio" id="male" name="gender" value="male" style={{ marginLeft: '5px', marginTop: '2.5px' }} checked />
-                     <label for="male" style={{ color: 'white', marginLeft: '5px', fontSize: '12.5px' }}>HOMBRE</label>
+                     <input type="radio" id="male" name="gender" value="male" style={{ marginLeft: '5px', marginTop: '2.5px' }} defaultChecked />
+                     <label htmlFor="male" style={{ color: 'white', marginLeft: '5px', fontSize: '12.5px' }}>HOMBRE</label>
                      <input type="radio" id="female" name="gender" value="male" style={{ marginLeft: '10px', marginTop: '2.5px' }} />
-                     <label for="female" style={{ color: 'white', marginLeft: '5px', fontSize: '12.5px' }}>MUJER</label>
+                     <label htmlFor="female" style={{ color: 'white', marginLeft: '5px', fontSize: '12.5px' }}>MUJER</label>
                   </Row>
                   <Row className="ml-2">
                      <p style={{ color: '#dc3545' }}>NACIONALIDAD</p>

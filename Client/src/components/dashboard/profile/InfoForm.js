@@ -13,13 +13,41 @@ const InfoForm = props => {
    
    const { User, StepEdit } = props
 
-   console.table(User)
+   const handleSubmit = e => {
+      e.preventDefault()
+      let Data = {
+         width: e.target.Width.value,
+         weight: e.target.Weight.value,
+         complexion: e.target.Complexion.value,
+         haircolor: e.target.HairColor.value,
+         profession: e.target.Profession.value,
+         drinker: e.target.Drinker.value,
+         smoker: e.target.Smoker.value,
+         sports: e.target.Sports.value,
+         usersports: e.target.UserSports.value,
+         zodiac: e.target.Zodiac.value.toString().toLowerCase(),
+         interests: e.target.Interests.value,
+         languages: e.target.Languages.value.toString().toLowerCase(),
+         nickname: e.target.Nickname.value,
+         password: e.target.Password.value,
+         password2: e.target.Password2.value,
+         image: e.target.UploadImage.value,
+      }
+      console.table(Data)
+   }
+
+   const handleImageChange = e => {
+      let reader = new FileReader()
+      reader.onload = function (e) {
+         document.getElementById("Profile-Image").src = e.target.result
+      }
+      reader.readAsDataURL(e.target.files[0])
+   }
 
    return (
       <>
-         {!StepEdit ? 
-         <Form>
-            <Container fluid="true" style={{ fontSize: '13px', marginLeft: '-15px' }}>
+         <Form onSubmit={e => handleSubmit(e)}>
+            <Container fluid="true" style={{ fontSize: '13px', marginLeft: '-15px', display: `${StepEdit ? 'none' : 'block'}` }}>
                <Row>
                   <Col style={{ marginTop: '30px', color: 'white', textAlign: 'left' }}>
                      RELLENE EL FORMULARIO (NO OBLIGATORIO):
@@ -27,41 +55,41 @@ const InfoForm = props => {
                </Row>
                <Row style={{ marginTop: '30px' }}>
                   <Col>
-                     <Form.Group controlId="formBasicUsername">
+                     <Form.Group>
                         <Form.Label style={({ color: '#dc3545' })}>ALTURA (METROS)</Form.Label>
-                        <Form.Control name="Width" type="text" placeholder="M" />
+                        <Form.Control name="Width" type="text" placeholder="m" />
                      </Form.Group>
                   </Col>
                   <Col>
-                     <Form.Group controlId="formBasicUsername">
+                     <Form.Group>
                         <Form.Label style={({ color: '#dc3545' })}>PESO (KILOS)</Form.Label>
-                        <Form.Control name="Username" type="text" placeholder="KG" />
+                        <Form.Control name="Weight" type="text" placeholder="KG" />
                      </Form.Group>
                   </Col>
                   <Col>
-                     <Form.Group controlId="formBasicUsername">
+                     <Form.Group>
                         <Form.Label style={({ color: '#dc3545' })}>COMPLEXION</Form.Label>
-                        <Form.Control name="Username" type="text" />
+                        <Form.Control name="Complexion" type="text" placeholder="Delgada | Robusta" />
                      </Form.Group>
                   </Col>
                </Row>
                <Row>
                   <Col xs={4}>
-                     <Form.Group controlId="formBasicUsername">
+                     <Form.Group>
                         <Form.Label style={({ color: '#dc3545' })}>COLOR DE PELO</Form.Label>
-                        <Form.Control name="Username" type="text" />
+                        <Form.Control name="HairColor" type="text" placeholder="Castaño" />
                      </Form.Group>
                   </Col>
                   <Col xs={8}>
-                     <Form.Group controlId="formBasicUsername">
+                     <Form.Group>
                         <Form.Label style={({ color: '#dc3545' })}>PROFESION</Form.Label>
-                        <Form.Control name="Username" type="text" />
+                        <Form.Control name="Profession" type="text" placeholder="Ing. Civil | Lic. Administracion" />
                      </Form.Group>
                   </Col>
                </Row>
                <Row>
                   <Col>
-                     <Form.Group controlId="formBasicUsername">
+                     <Form.Group>
                         <Row>
                            <Col>
                               <Form.Label style={({ color: '#dc3545' })}>¿BEBES?</Form.Label>
@@ -69,16 +97,16 @@ const InfoForm = props => {
                         </Row>
                         <Row style={{ color: 'white' }}>
                            <Col>
-                              <Form.Check className="ml-3" type="radio" label="SI" name="Drink" id="DrinkRadios1" />
+                              <Form.Check className="ml-3" type="radio" label="SI" value="Si Bebe" name="Drinker" id="DrinkRadios1" />
                            </Col>
                            <Col>
-                              <Form.Check className="mr-3" type="radio" label="NO" name="Drink" id="DrinkRadios2" checked />
+                              <Form.Check className="mr-3" type="radio" label="NO" value="No Bebe" name="Drinker" id="DrinkRadios2" defaultChecked />
                            </Col>
                         </Row>
                      </Form.Group>
                   </Col>
                   <Col>
-                     <Form.Group controlId="formBasicUsername">
+                     <Form.Group>
                         <Row>
                            <Col>
                               <Form.Label style={({ color: '#dc3545' })}>¿FUMAS?</Form.Label>
@@ -86,16 +114,16 @@ const InfoForm = props => {
                         </Row>
                         <Row style={{ color: 'white' }}>
                            <Col>
-                              <Form.Check className="ml-3" type="radio" label="SI" name="Smoke" id="SmokeRadios1" />
+                              <Form.Check className="ml-3" type="radio" label="SI" value="Si Fuma" name="Smoker" id="SmokeRadios1" />
                            </Col>
                            <Col>
-                              <Form.Check className="mr-3" type="radio" label="NO" name="Smoke" id="SmokeRadios2" checked />
+                              <Form.Check className="mr-3" type="radio" label="NO" value="No Fuma" name="Smoker" id="SmokeRadios2" defaultChecked />
                            </Col>
                         </Row>
                      </Form.Group>
                   </Col>
                   <Col>
-                     <Form.Group controlId="formBasicUsername">
+                     <Form.Group>
                         <Row>
                            <Col>
                               <Form.Label style={({ color: '#dc3545' })}>¿HACES DEPORTE?</Form.Label>
@@ -103,10 +131,10 @@ const InfoForm = props => {
                         </Row>
                         <Row style={{ color: 'white' }}>
                            <Col>
-                              <Form.Check className="ml-3" type="radio" label="SI" name="Sports" id="SportsRadios1" />
+                              <Form.Check className="ml-3" type="radio" label="SI" value="Si Hace Deporte" name="Sports" id="SportsRadios1" />
                            </Col>
                            <Col>
-                              <Form.Check className="mr-3" type="radio" label="NO" name="Sports" id="SportsRadios2" checked />
+                              <Form.Check className="mr-3" type="radio" label="NO" value="No Hace Deporte" name="Sports" id="SportsRadios2" defaultChecked />
                            </Col>
                         </Row>
                      </Form.Group>
@@ -114,15 +142,15 @@ const InfoForm = props => {
                </Row>
                <Row>
                   <Col xs={8}>
-                     <Form.Group controlId="formBasicUsername">
+                     <Form.Group>
                         <Form.Label style={({ color: '#dc3545' })}>¿QUE DEPORTE PRACTICAS?</Form.Label>
-                        <Form.Control name="Username" type="text" />
+                        <Form.Control name="UserSports" type="text" placeholder="Soccer | Basketball | Tenis" />
                      </Form.Group>
                   </Col>
                   <Col xs={4}>
-                     <Form.Group controlId="formGridState">
+                     <Form.Group>
                         <Form.Label style={({ color: '#dc3545' })}>SIGNO (ZODIACO)</Form.Label>
-                        <Form.Control as="select">
+                        <Form.Control name="Zodiac" as="select">
                            <option>ARIES</option>
                            <option>TAURO</option>
                            <option>GÉMINIS</option>
@@ -141,15 +169,15 @@ const InfoForm = props => {
                </Row>
                <Row>
                   <Col xs={8}>
-                     <Form.Group controlId="formBasicUsername">
+                     <Form.Group>
                         <Form.Label style={({ color: '#dc3545' })}>INTERESES Y AFICIONES</Form.Label>
-                        <Form.Control name="Username" type="text" />
+                        <Form.Control name="Interests" type="text" placeholder="Leer | Cantar | Pasear" />
                      </Form.Group>
                   </Col>
                   <Col xs={4}>
-                        <Form.Group controlId="formGridState">
+                        <Form.Group>
                            <Form.Label style={({ color: '#dc3545' })}>IDIOMAS</Form.Label>
-                           <Form.Control as="select">
+                           <Form.Control name="Languages" as="select" >
                               <option>ESPAÑOL</option>
                               <option>INGLES</option>
                               <option>FRANCES</option>
@@ -158,35 +186,34 @@ const InfoForm = props => {
                   </Col>
                </Row>
             </Container>
-         </Form>
-         :
-         <Form>
-            <Container fluid="true" style={{ fontSize: '13px', marginLeft: '-15px' }}>
+            <Container fluid="true" style={{ fontSize: '13px', marginLeft: '-15px', display: `${StepEdit ? 'block' : 'none'}` }}>
                <Row>
                   <Col style={{ marginTop: '30px', color: 'white', textAlign: 'left' }}>
                      CREE SU AVATAR UNICO EN POCOS PASOS:
-               </Col>
+                  </Col>
                </Row>
                <Row style={{ marginTop: '30px' }}>
                   <Col xs={8}>
                      <Row>
                         <Col>
-                           <Form.Group controlId="formBasicUsername">
+                           <Form.Group>
                               <Form.Label style={({ color: '#dc3545' })}>NICKNAME (MAXIMO 14 CARACTERES)</Form.Label>
                               <Form.Control name="Nickname" type="text" placeholder="Usuario" />
                            </Form.Group>
                         </Col>
                      </Row>
+                     <br />
                      <Row>
                         <Col>
-                           <img alt="ProfileImage" src={User.image} style={{ width: '310px', height: '310px' }} />
+                           <img alt="ProfileImage" src={User.image} id="Profile-Image" className="rounded-circle" 
+                                style={{ width: '250px', height: '250px' }} name="Profile-Image" />
                         </Col>
                      </Row>
                   </Col>
                   <Col xs={4}>
                      <Row>
                         <Col>
-                           <Form.Group controlId="formBasicUsername">
+                           <Form.Group>
                               <Form.Label style={({ color: '#dc3545' })}>CONTRASEÑA</Form.Label>
                               <Form.Control name="Password" type="password" placeholder="Password" />
                            </Form.Group>
@@ -194,7 +221,7 @@ const InfoForm = props => {
                      </Row>
                      <Row>
                         <Col>
-                           <Form.Group controlId="formBasicUsername">
+                           <Form.Group>
                               <Form.Label style={({ color: '#dc3545' })}>REPETIR CONTRASEÑA</Form.Label>
                               <Form.Control name="Password2" type="password" placeholder="Password" />
                            </Form.Group>
@@ -202,25 +229,37 @@ const InfoForm = props => {
                      </Row>
                      <Row>
                         <Col>
-                              <Button variant="outline-light" style={{ fontSize: '12.4px', backgroundImage: `url(${IconoFoto})`, backgroundRepeat: 'no-repeat', backgroundSize: '25px', backgroundPositionX: '-1px', backgroundPositionY: '15px' }}>HACER UNA FOTO</Button>
+                           <Button variant="outline-light" style={{ fontSize: '12.4px', backgroundImage: `url(${IconoFoto})`, 
+                                   backgroundRepeat: 'no-repeat', backgroundSize: '25px', backgroundPositionX: '-1px', backgroundPositionY: '15px' }}>
+                                      HACER UNA FOTO
+                           </Button>
                         </Col>
                      </Row>
                      <br />
                      <Row>
                         <Col>
-                              <Button variant="outline-light" style={{ fontSize: '12.4px', backgroundImage: `url(${IconoArchivo})`, backgroundRepeat: 'no-repeat', backgroundSize: '25px', backgroundPositionX: '-1px', backgroundPositionY: '10px' }}>SELECCIONAR UNA FOTO</Button>
+                           <input type="file" accept="image/*" id="UploadImage" name="UploadImage" style={{ display: 'none' }} 
+                                  onChange={(e) => handleImageChange(e)} />
+                           <Button variant="outline-light" style={{ fontSize: '12.4px', backgroundImage: `url(${IconoArchivo})`,
+                                   backgroundRepeat: 'no-repeat', backgroundSize: '23px', backgroundPositionX: '-1px', backgroundPositionY: '10px'}}
+                                   onClick={() => document.getElementById("UploadImage").click()} >
+                                       SELECCIONAR UNA FOTO
+                           </Button>
                         </Col>
                      </Row>
                      <br />
                      <Row>
                         <Col>
-                              <Button variant="success" style={{ fontSize: '22.5px' }}>GUARDAR</Button>
+                           <Button type="submit" variant="success" 
+                                   style={{ fontSize: '22.5px', width: '148px', height: '50px', textAlign: 'center' }}>
+                              GUARDAR
+                           </Button>
                         </Col>
                      </Row>
                   </Col>
                </Row>
             </Container>
-         </Form>}
+         </Form>
       </>
    )
 }

@@ -12,7 +12,7 @@ const FormLanding = props => {
    const { login, username, email, password } = props.Errors || ''
    const { Submit } = props
 
-   const handleSubmit = (e) => {
+   const handleSubmit = e => {
       e.preventDefault()
       let Data = {}
       RenderLoggin ? 
