@@ -17,7 +17,7 @@ const BodyDashboard = props => {
 
    const { User } = props.User
 
-   const [EditUserProfile, SetEditUserProfile] = useState(true) //false
+   const [EditUserProfile, SetEditUserProfile] = useState(false) //false
 
    return (
       <>
