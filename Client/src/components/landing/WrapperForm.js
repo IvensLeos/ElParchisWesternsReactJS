@@ -6,7 +6,7 @@ const WrapperForm = props => {
 
    const [Errors, SetErrors] = useState({})
 
-   const { User } = props
+   const { SetUser } = props
 
    const handleSubmit = (Data) => {
       try {
@@ -15,7 +15,7 @@ const WrapperForm = props => {
             { method: 'POST', body: JSON.stringify(Data), headers: { 'Content-Type': 'application/json' } })
             .then(r => r.json()).then(data => {
                if (data.errors) return SetErrors(data.errors)
-               if (data) return User(data)
+               if (data) return SetUser(data)
             })
 
          Data.RenderLoggin &&
@@ -23,7 +23,7 @@ const WrapperForm = props => {
             { method: 'POST', body: JSON.stringify(Data), headers: { 'Content-Type': 'application/json' } })
             .then(r => r.json()).then(data => {
                if (data.errors) return SetErrors(data.errors)
-               if (data) return User(data)
+               if (data) return SetUser(data)
             })
       } catch (error) {console.log('TRY/CATCH SIGNUP/LOGIN ERROR')}
    }

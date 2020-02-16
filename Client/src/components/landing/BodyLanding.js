@@ -30,7 +30,7 @@ const BodyLanding = props => {
                         <Container>
                            <>
                               <img src={Inicio} alt="Imagen De Inicio" style={{width: '80%'}} />
-                              <WrapperForm User={props.User}/>
+                              <WrapperForm SetUser={props.SetUser}/>
                            </>
                         </Container>
                      </Col>

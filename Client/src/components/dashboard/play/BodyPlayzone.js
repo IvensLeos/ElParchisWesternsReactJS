@@ -1,38 +1,30 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import PlaySketch from './PlaySketch'
 
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import Button from 'react-bootstrap/Button'
 
-import { Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import '../../../assets/styles/BodyPlay.css'
 
 const BodyPlay = () => {
 
-   const [Tablero, SetTablero] = useState(false)
-
-   const IrAlDashboard = () => {
-      SetTablero(true)
-   }
-
    return (
-      <>
-         {Tablero ? <Redirect to="/dashboard" /> : 
-         <Container fluid='true' >
-            <Row>
-               <Col xs={7}>
-                  <PlaySketch />
-               </Col>
-               <Col xs={5}>
-                  <Button onClick={IrAlDashboard}>Regresar</Button>
-               </Col>
-            </Row>
-         </Container>}
-      </>
+      <Container fluid='true'>
+         <Row>
+            <Col xs={7}>
+               <PlaySketch />
+            </Col>
+            <Col xs={5}>
+               <div className="mt-2">
+                  <Link to="/dashboard" className="btn btn-primary">Regresar</Link>
+               </div>
+            </Col>
+         </Row>
+      </Container>
    )
 }
 

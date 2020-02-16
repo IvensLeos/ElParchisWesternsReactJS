@@ -3,7 +3,7 @@ import React from 'react'
 import BodyLanding from './BodyLanding'
 
 const index = props => {
-  return <BodyLanding User={props.User} />
+  return <BodyLanding SetUser={props.SetUser} />
 }
 
 export default index

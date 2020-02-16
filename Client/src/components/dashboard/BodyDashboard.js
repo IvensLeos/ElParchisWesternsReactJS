@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import CardPlayer from './profile/CardPlayer'
+import EditProfile from './profile/EditProfile'
 import HelpUser from './help/HelpUser'
 
 import '../../assets/styles/BodyDashboard.css'
@@ -16,6 +17,8 @@ const BodyDashboard = props => {
 
    const { User } = props.User
 
+   const [EditUserProfile, SetEditUserProfile] = useState(false)
+
    return (
       <>
          <Container fluid="true">
@@ -25,10 +28,12 @@ const BodyDashboard = props => {
                   <Container className="Background">
                      <Tabs fill variant="tabs" defaultActiveKey="PERFIL" id="uncontrolled-tab-example" className="TabsClass" >
                         <Tab eventKey="PERFIL" title="MI PERFIL">
+                           {!EditUserProfile ? 
                            <CardPlayer
                               Picture={User.image} Username={User.username}
-                              Level={User.level} Bio={User.bio}
-                           />
+                              Level={User.level} Bio={User.bio} SetEditUserProfile={SetEditUserProfile}
+                           /> 
+                           : <EditProfile User={User} SetEditUserProfile={SetEditUserProfile} />}
                         </Tab>
                         <Tab eventKey="MENSAJES" title="MENSAJES">
                            <p>MENSAJES</p>

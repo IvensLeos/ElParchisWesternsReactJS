@@ -1,16 +1,12 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import { Redirect } from 'react-router-dom'
 
 import Landing from '../components/landing'
-//import Dashboard from '../components/dashboard/'
 
-export const LandingPage = () => {
+export const LandingPage = props => {
+   
+   const { User, SetUser } = props
 
-   const [User, SetUser] = useState('')
-
-   return User ? 
-      <Redirect to={{pathname: '/dashboard', state: {User}}} />
-      : 
-      <Landing User={SetUser} />
+   return User ? <Redirect to="/dashboard" /> : <Landing SetUser={SetUser} />
 }
