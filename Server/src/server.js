@@ -15,7 +15,7 @@ import { NODE_ENV, MONGODB_URI, SESSION_NAME, SESSION_SECRET, SESSION_LIFETIME }
 (async () => {
    try {
 
-      await mongoose.connect(process.env.MONGODB_URI || MONGODB_URI, { keepAlive: 1, useUnifiedTopology: true, useNewUrlParser: true })
+      await mongoose.connect(MONGODB_URI, { keepAlive: 1, useUnifiedTopology: true, useNewUrlParser: true })
       console.log('Conectado A MongoDB')
 
       const app = express()
